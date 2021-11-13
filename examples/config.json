@@ -1,0 +1,7 @@
+{
+  "authUsername": "admin",
+  "authPassword": "changemepls",
+  "listenAddress": ":2653",
+  "osType": "linux",
+  "useSudo": true
+}

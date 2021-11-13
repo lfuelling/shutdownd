@@ -1,0 +1,4 @@
+# Allow shutdownd user to access /sbin/shutdown
+shutdownd ALL=(ALL) NOPASSWD: /sbin/shutdown
+
+Defaults:shutdownd !requiretty

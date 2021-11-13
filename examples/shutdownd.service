@@ -1,0 +1,26 @@
+[Unit]
+Description=ShutdownD
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=shutdownd
+Group=shutdownd
+Type=simple
+ExecStart=/usr/local/bin/shutdownd
+WorkingDirectory=/home/shutdownd
+Restart=on-failure
+Environment=USER=shutdownd HOME=/home/shutdownd
+
+LimitMEMLOCK=infinity
+LimitNOFILE=65535
+
+# Some distributions may not support these hardening directives. If you cannot start the service due
+# to an unknown option, comment out the ones not supported by your version of systemd.
+ProtectSystem=full
+PrivateDevices=yes
+PrivateTmp=yes
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
