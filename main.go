@@ -7,7 +7,7 @@ import (
 
 func main() {
 	// initialize flags
-	configPath := flag.String("config", "/etc/shutdownd.json", "path to the config file")
+	configPath := flag.String("config", "/etc/shutdownd/config.json", "path to the config file")
 	flag.Parse()
 
 	// load configuration

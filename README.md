@@ -8,7 +8,7 @@ Here's a quick example of how you can use this software on Linux.
 
 1. Download or build the `shutdownd` executable and copy it to `/usr/local/bin/shutdownd`
 2. Add the shutdownd user: `sudo useradd -r shutdownd`
-3. Copy `examples/config.json` to `/etc/shutdownd.json` and edit it to match your setup
+3. Copy `examples/config.json` to `/etc/shutdownd/config.json` and edit it to match your setup
 4. Copy `examples/shutdownd.service` to `/etc/systemd/system/shutdownd.service`
 5. Copy `examples/shutdownd.sudoers` to `/etc/sudoers.d/shutdownd`
 6. Start the service: `systemctl daemon-reload && systemctl enable --now shutdownd`
