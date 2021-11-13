@@ -3,5 +3,8 @@
   "authPassword": "changemepls",
   "listenAddress": ":2653",
   "osType": "linux",
-  "useSudo": true
+  "useSudo": true,
+  "useTls": false,
+  "tlsCertificateFile": "/etc/shutdownd/cert.pem",
+  "tlsCertificateKey": "/etc/shutdownd/key.pem"
 }

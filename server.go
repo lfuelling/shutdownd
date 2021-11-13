@@ -3,23 +3,53 @@ package main
 import (
 	"crypto/sha512"
 	"crypto/subtle"
+	"crypto/tls"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
 )
 
-func startServer(config Config) {
-	server := &http.Server{
+func httpServer(config Config) http.Server {
+	return http.Server{
 		Addr:         config.ListenAddress,
 		Handler:      handleRequest(config),
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}
+}
+
+func tlsServer(config Config) http.Server {
+	return http.Server{
+		Addr:         config.ListenAddress,
+		Handler:      handleRequest(config),
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		TLSConfig: &tls.Config{
+			MinVersion:               tls.VersionTLS13,
+			PreferServerCipherSuites: true,
+		},
+	}
+}
+
+func startServer(config Config) {
+	var server http.Server
+	if config.UseTls {
+		server = tlsServer(config)
+	} else {
+		server = httpServer(config)
+	}
 	log.Println("Starting server on " + config.ListenAddress)
-	err2 := server.ListenAndServe()
-	if err2 != nil {
-		log.Fatalln("Unable to start server!", err2)
+	if config.UseTls {
+		err := server.ListenAndServeTLS(config.TlsCertificateFile, config.TlsCertificateKey)
+		if err != nil {
+			log.Fatalln("Unable to start server!", err)
+		}
+	} else {
+		err := server.ListenAndServe()
+		if err != nil {
+			log.Fatalln("Unable to start server!", err)
+		}
 	}
 }
 

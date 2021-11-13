@@ -7,11 +7,14 @@ import (
 )
 
 type Config struct {
-	AuthUsername  string
-	AuthPassword  string
-	ListenAddress string
-	OsType  string
-	UseSudo bool
+	AuthUsername       string
+	AuthPassword       string
+	ListenAddress      string
+	OsType             string
+	UseSudo            bool
+	UseTls             bool
+	TlsCertificateFile string
+	TlsCertificateKey  string
 }
 
 func readConfig(configPath string) (Config, error) {

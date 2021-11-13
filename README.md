@@ -14,7 +14,8 @@ Here's a quick example of how you can use this software on Linux.
 6. Start the service: `systemctl daemon-reload && systemctl enable --now shutdownd`
 
 - Make sure the port the server listens on is accessible by the client that triggers the shutdown!
-- Make sure that only the service user can read/write the config file to prevent credential leakage!
+- Make sure that only the service user can read/write the config path (`/etc/shutdownd`) to prevent credential/cert leakage!
+- You should use TLS because HTTP Basic Auth is plain text without it!
 
 ### Configuration
 
@@ -32,3 +33,9 @@ Below you can find a list of all available configuration options and what they d
 - `useSudo` (boolean)
     - Decides whether to prepend `sudo ` to the shutdown command
     - Ignored when `osType` is `windows`
+- `useTls` (boolean)
+    - Enables or disables TLS.
+- `tlsCertificateFile` (string)
+    - Path to certificate
+- `tlsCertificateKey` (string)
+    - Path to certificate private key 
