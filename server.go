@@ -11,12 +11,12 @@ import (
 
 func startServer(config Config) {
 	server := &http.Server{
-		Addr:         config.listenAddress,
+		Addr:         config.ListenAddress,
 		Handler:      handleRequest(config),
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}
-	log.Println("Starting server on " + config.listenAddress)
+	log.Println("Starting server on " + config.ListenAddress)
 	err2 := server.ListenAndServe()
 	if err2 != nil {
 		log.Fatalln("Unable to start server!", err2)
@@ -53,8 +53,8 @@ func handleRequest(config Config) http.HandlerFunc {
 func checkCredentials(config Config, username string, password string) bool {
 	usernameHash := sha512.Sum512([]byte(username))
 	passwordHash := sha512.Sum512([]byte(password))
-	expectedUsernameHash := sha512.Sum512([]byte(config.authUsername))
-	expectedPasswordHash := sha512.Sum512([]byte(config.authPassword))
+	expectedUsernameHash := sha512.Sum512([]byte(config.AuthUsername))
+	expectedPasswordHash := sha512.Sum512([]byte(config.AuthPassword))
 
 	usernameMatch := subtle.ConstantTimeCompare(usernameHash[:], expectedUsernameHash[:]) == 1
 	passwordMatch := subtle.ConstantTimeCompare(passwordHash[:], expectedPasswordHash[:]) == 1

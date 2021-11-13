@@ -7,11 +7,11 @@ import (
 )
 
 type Config struct {
-	authUsername  string
-	authPassword  string
-	listenAddress string
-	osType        string
-	useSudo       bool
+	AuthUsername  string
+	AuthPassword  string
+	ListenAddress string
+	OsType  string
+	UseSudo bool
 }
 
 func readConfig(configPath string) (Config, error) {
