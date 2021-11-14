@@ -16,16 +16,15 @@ func shutdownSystem(command string, args ...string) (string, error) {
 
 func handleShutdown(config Config) (string, error) {
 	osType := strings.ToLower(config.OsType)
-	switch osType {
-	case "linux":
-	case "bsd":
+	if osType == "linux" || osType == "bsd" {
 		if config.UseSudo {
 			return shutdownSystem("sudo", "shutdown", "-h", "now")
 		} else {
 			return shutdownSystem("shutdown", "-h", "now")
 		}
-	case "windows":
+	} else if osType == "windows" {
 		return shutdownSystem("cmd", "/C", "shutdown", "/t", "0", "/s")
+	} else {
+		return "Configuration Error!", errors.New("Invalid OsType: '" + osType + "'!")
 	}
-	return "Configuration Error!", errors.New("Invalid OsType: '" + osType + "'!")
 }
