@@ -29,7 +29,7 @@ Below you can find a list of all available configuration options and what they d
     - The address string to listen on. Port is required, host/ip is optional.
 - `osType` (string)
     - Decides which shutdown command to use 
-    - Possible values: `linux`, `bsd`, `windows`
+    - Possible values: `linux`, `bsd`, `systemd`, `windows`
 - `useSudo` (boolean)
     - Decides whether to prepend `sudo ` to the shutdown command
     - Ignored when `osType` is `windows`

@@ -22,6 +22,8 @@ func handleShutdown(config Config) (string, error) {
 		} else {
 			return shutdownSystem("shutdown", "-h", "now")
 		}
+	} else if osType == "systemd" {
+		return shutdownSystem("systemctl", "poweroff")
 	} else if osType == "windows" {
 		return shutdownSystem("cmd", "/C", "shutdown", "/t", "0", "/s")
 	} else {
