@@ -2,12 +2,17 @@ package main
 
 import (
 	"errors"
+	"log"
 	"os/exec"
 	"strings"
 )
 
 func shutdownSystem(command string, args ...string) (string, error) {
-	if err := exec.Command(command, args...).Run(); err != nil {
+	cmd := exec.Command(command, args...)
+	err := cmd.Run()
+	out, _ := cmd.Output()
+	log.Println(out)
+	if err != nil {
 		return "Failed to trigger shutdown!", err
 	} else {
 		return "OK", nil
