@@ -15,7 +15,7 @@ Here's a quick example of how you can use this software on Linux.
 
 - Make sure the port the server listens on is accessible by the client that triggers the shutdown!
 - Make sure that only the service user can read/write the config path (`/etc/shutdownd`) to prevent credential/cert leakage!
-- You should use TLS because HTTP Basic Auth is plain text without it!
+- You should use TLS because HTTP Basic Auth is transmitted in plain text without it!
 
 ### Configuration
 
