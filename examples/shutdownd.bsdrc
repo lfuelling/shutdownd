@@ -4,7 +4,13 @@
 name="shutdownd"
 rcvar=shutdownd_enable
 pidfile="/var/run/${name}.pid"
+start_cmd="shutdownd_start"
 command="/usr/local/bin/shutdownd"
+
+shutdownd_start(){
+    echo "starting shutdownd..."
+   /usr/sbin/daemon -f -p ${pidfile} ${command}
+}
 
 load_rc_config ${name}
 run_rc_command "$1"
